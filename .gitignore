@@ -1,1 +1,45 @@
-node_modules
+# Node modules
+/node_modules/
+
+# Angular build output
+/dist/
+/out-tsc/
+
+/tmp/
+/temp/
+
+# IDE and editor folders
+/.idea/
+/.vscode/
+/*.swp
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Environment files
+/src/environments/environment.prod.ts
+/src/environments/environment.ts
+
+# Compiled files
+*.js
+*.js.map
+*.css
+*.scss
+
+# npm log files
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# TypeScript declaration files
+*.d.ts
+
+# Angular CLI generated files
+.angular/
+
+# Local environment file (you can adjust this based on your environment)
+.env.local
+.env.development
+.env.test
+
