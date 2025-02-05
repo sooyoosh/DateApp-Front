@@ -1,0 +1,39 @@
+<div class="card">
+    <p-toolbar>
+    <div class="p-toolbar-group-start pl-5">
+        <a class="text-lg no-underline font-bold text-2xl" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Dating App</a>
+        @if(isLogedIn){
+            <a class="text-lg no-underline  ml-4" routerLink="/ddd" routerLinkActive="active">matches</a>
+            <a class="text-lg no-underline  ml-4" routerLink="/felan" routerLinkActive="active">lists</a>
+            <a class="text-lg no-underline  ml-4" routerLink="/felan" routerLinkActive="active">message</a>
+            <a class="text-lg no-underline  ml-4 cursor-pointer" (click)="logOut()">logout</a>
+        }
+    </div>
+    <!-- <div class="p-toolbar-group-center">    
+    </div> -->
+    <div class="p-toolbar-group-end  w-4">
+        @if (!isLogedIn) {
+            <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+                <div class="grid w-full">
+                    <div class="col-5 ">
+                        <input name="Username" required ngModel type="text" pInputText class="w-full">
+                    </div>
+                    <div class="col-5">
+                        <input name="Password" required ngModel type="password" pInputText class="w-full">
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" style="border-radius: 12px;" pButton pRipple label="Login" class="p-button-success"></button> 
+                    </div>
+                </div>
+            </form>
+        }
+        @else{
+            <div class="grid w-full justify-content-end">
+                <div class="col-4">
+                    <p-menubar [model]="items" [style]="{border:'none'}"/>
+                </div>
+            </div>
+        }
+    </div>
+    </p-toolbar>
+    </div>
