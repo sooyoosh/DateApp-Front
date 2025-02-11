@@ -39,6 +39,13 @@ export class NavbarComponent implements OnInit{
       }
     ] 
     //menu items 
+    //obsrve user login
+    this.accountService.currentUser$.subscribe((data)=>{
+      if(data!=null){
+        this.isLogedIn=true
+      }
+    })
+    //obsrve user login
   }
 
   onLogin(form:any){

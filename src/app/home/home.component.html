@@ -10,9 +10,18 @@
     </div>
 }
 @else {
-    <h1>
-        register form here
-    </h1>
+    <form #registerForm="ngForm"  (ngSubmit)="register(registerForm)">
+    <div class="flex flex-column  h-11rem " >
+            <label class="mt-2">Enter Your Username</label>
+            <input type="text" name="UserName" class="mt-2" pInputText ngModel />
+            <label class="mt-2">Enter Your Password</label>
+            <input type="password" name="Password" class="mt-2" pInputText ngModel />
+            <div class="mt-4">
+                <p-button label="Register" class="mr-3" type="submit"/>
+                <p-button label="Cancle" (onClick)="cancle()"  severity="danger"/>
+            </div>
+        </div>
+    </form>
 }
 
 </div>

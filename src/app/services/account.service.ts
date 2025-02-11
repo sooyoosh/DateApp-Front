@@ -23,6 +23,18 @@ login(model){
     })
   )
 }
+register(model){
+  return this.http.post<user>(environment.apiBaseUrl+'account/register',model).pipe(
+    map((res:user)=>{
+      const user=res;
+      if(user){
+        localStorage.setItem('user',JSON.stringify(user))
+        this.correntUserSource.next(user)
+      }
+      return user;
+    })
+  )
+}
 logout(){
   localStorage.removeItem('user')
   this.correntUserSource.next(null)
