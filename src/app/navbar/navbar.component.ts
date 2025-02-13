@@ -3,6 +3,7 @@ import { AccountService } from '../services/account.service';
 import { MessageService } from 'primeng/api';
 import { MenuItem } from 'primeng/api';
 import { user } from '../models/user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,15 +14,25 @@ import { user } from '../models/user';
 export class NavbarComponent implements OnInit{
   isLogedIn:boolean=false
   items:MenuItem[]
-  constructor(private accountService:AccountService,private messageService: MessageService ){
+  userName:any
+  constructor(private accountService:AccountService,private messageService: MessageService,
+    private router:Router
+   ){
 
   }
 
   ngOnInit() {
-    //menu items
+
+     
+    //obsrve user login
+    this.accountService.currentUser$.subscribe((data)=>{
+      if(data!=null){
+        this.isLogedIn=true
+        this.userName=data.username
+        //menu items
     this.items=[
       {
-        label:'welcome',
+        label:this.userName?`Welcome ${this.userName}`:'Welcome',
         icon:'pi pi-face-smile',
         items:[
           {
@@ -38,11 +49,7 @@ export class NavbarComponent implements OnInit{
         ]
       }
     ] 
-    //menu items 
-    //obsrve user login
-    this.accountService.currentUser$.subscribe((data)=>{
-      if(data!=null){
-        this.isLogedIn=true
+    //menu items
       }
     })
     //obsrve user login
@@ -60,6 +67,7 @@ export class NavbarComponent implements OnInit{
     this.accountService.login(form.value).subscribe({
       next:(data)=>{
         this.isLogedIn=true
+        this.router.navigate(['/members'])
       },
       error:(err)=>{
         this.messageService.add({ key: 'toast1', severity: 'error', summary: 'Error', detail:err.error });        
@@ -81,6 +89,7 @@ export class NavbarComponent implements OnInit{
   logOut(){
     this.isLogedIn=false
     this.accountService.logout();
+    this.router.navigate(['/'])
   }
 
   editProfile(){

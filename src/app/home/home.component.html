@@ -1,27 +1,30 @@
-<div class="mr-auto ml-auto mt-7 w-6">
-@if (!registerMode) {
-    <div class="flex flex-column align-items-center">
-    <h1 class="m-0">find your match</h1>
-    <p class="text-2xl">Come on into view your Matches! all you need is sign up!!</p>
-    <div class="grid gap-2 mt-2">
-        <p-button label="Register" (onClick)="registerToggle()" />
-        <p-button label="Learn More" severity="info" />
-    </div>
-    </div>
-}
-@else {
-    <form #registerForm="ngForm"  (ngSubmit)="register(registerForm)">
-    <div class="flex flex-column  h-11rem " >
-            <label class="mt-2">Enter Your Username</label>
-            <input type="text" name="UserName" class="mt-2" pInputText ngModel />
-            <label class="mt-2">Enter Your Password</label>
-            <input type="password" name="Password" class="mt-2" pInputText ngModel />
-            <div class="mt-4">
-                <p-button label="Register" class="mr-3" type="submit"/>
-                <p-button label="Cancle" (onClick)="cancle()"  severity="danger"/>
-            </div>
-        </div>
-    </form>
-}
+@if(!isLogedIn){
 
-</div>
+    <div class="mr-auto ml-auto w-6">
+    @if (!registerMode) {
+        <div class="flex flex-column align-items-center">
+        <h1 class="m-0">find your match</h1>
+        <p class="text-2xl">Come on into view your Matches! all you need is sign up!!</p>
+        <div class="grid gap-2 mt-2">
+            <p-button label="Register" (onClick)="registerToggle()" />
+            <p-button label="Learn More" severity="info" />
+        </div>
+        </div>
+    }
+    @else {
+        <form #registerForm="ngForm"  (ngSubmit)="register(registerForm)">
+        <div class="flex flex-column  h-11rem " >
+                <label class="mt-2">Enter Your Username</label>
+                <input type="text" name="UserName" class="mt-2" pInputText ngModel />
+                <label class="mt-2">Enter Your Password</label>
+                <input type="password" name="Password" class="mt-2" pInputText ngModel />
+                <div class="mt-4">
+                    <p-button label="Register" class="mr-3" type="submit"/>
+                    <p-button label="Cancle" (onClick)="cancle()"  severity="danger"/>
+                </div>
+            </div>
+        </form>
+    }
+    
+    </div>
+}

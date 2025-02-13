@@ -10,12 +10,15 @@ import { user } from '../models/user';
 })
 export class HomeComponent implements OnInit {
   registerMode:boolean=false
+  isLogedIn:boolean=false
   constructor(private messageService: MessageService,private accountService:
     AccountService
   ){}
 
   ngOnInit() {
-    
+    this.accountService.currentUser$.subscribe((data)=>{
+      data!=null?this.isLogedIn=true:this.isLogedIn=false
+    })
   }
 
 registerToggle(){
@@ -35,7 +38,7 @@ register(form){
       debugger
     },
     error:(err)=>{
-      debugger
+      this.messageService.add({ key: 'toast1', severity: 'error', summary: 'Error', detail:'useramusername already taken' })
     }
   })
 
