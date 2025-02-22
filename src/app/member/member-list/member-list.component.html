@@ -1,1 +1,20 @@
-<p>member-list works!</p>
+<div class="card flex gap-2 justify-content-center">
+@for (item of members; track item.id) {
+        <p-card header="Advanced Card" subheader="{{item.userName}}" [style]="{ width: '360px' }">
+            <ng-template pTemplate="header">
+                <img alt="Card" class="profile-image" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+            </ng-template>
+            <p>
+               {{item.knownAs}}
+            </p>
+            <ng-template pTemplate="footer">
+                <div class="flex gap-3 mt-1">
+                    <p-button icon="pi pi-user" [routerLink]="['/member',item.userName]" severity="secondary" [raised]="true" class="w-full" styleClass="w-full" />
+                    <p-button icon="pi pi-heart" severity="secondary" [raised]="true" class="w-full" styleClass="w-full" />
+                    <p-button icon="pi pi-envelope" severity="secondary" [raised]="true" class="w-full" styleClass="w-full" />
+                </div>
+            </ng-template>
+        </p-card>
+        
+    }
+</div>

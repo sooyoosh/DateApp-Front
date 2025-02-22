@@ -12,7 +12,7 @@ const routes: Routes = [
   {path:'',runGuardsAndResolvers:'always',canActivate:[authGuard],
     children:[
       {path:'members', component:MemberListComponent},
-      {path:'member/:id', component:MemberDetailComponent},
+      {path:'member/:userName', component:MemberDetailComponent},
       {path:'lists', component:ListsComponent},
       {path:'messages', component:MessagesComponent}
     ]
