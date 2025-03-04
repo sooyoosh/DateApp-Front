@@ -22,6 +22,12 @@ import { authInterceptor } from './interceptors/auth.interceptor';
 import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
 import { GalleriaModule } from 'primeng/galleria';
+import { MemberEditComponent } from './member/member-edit/member-edit.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { LoadingComponent } from './loading/loading/loading.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
+
 
 @NgModule({
   declarations: [
@@ -31,7 +37,9 @@ import { GalleriaModule } from 'primeng/galleria';
     MemberListComponent,
     MemberDetailComponent,
     ListsComponent,
-    MessagesComponent
+    MessagesComponent,
+    MemberEditComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +55,9 @@ import { GalleriaModule } from 'primeng/galleria';
     ToastModule,
     CardModule,
     TabViewModule,
-    GalleriaModule 
+    GalleriaModule,
+    InputTextareaModule,
+    ProgressSpinnerModule 
   ],
   providers: [MessageService,provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent]

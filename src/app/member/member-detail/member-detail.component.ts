@@ -35,16 +35,15 @@ export class MemberDetailComponent implements OnInit{
     this.loadMember()
   }
   loadMember(){
-    debugger
     const userName=this.route.snapshot.paramMap.get('userName')
     if(!userName) return
     this.memberService.getMemberByUsername(userName).subscribe({
       next:(res)=>{
         this.member=res,
-        // res.photos.map(p=>{
-        //   this.images.push({src:p.url,thum:p.url})
-        // })
-        this.images.push({src:'../../../assets/profile-user.jpg',thum:'../../../assets/profile-user.jpg'})
+        res.photos.map(p=>{
+          this.images.push({src:p.url,thum:p.url})
+        })
+        
       },
       error:(err)=>{
         this.messagingService.add({

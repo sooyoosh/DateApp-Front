@@ -1,0 +1,79 @@
+@if (member) {
+    <div class="card flex gap-2 p-3">
+        <div class="w-3">
+            <p-card header="{{member.userName}}" subheader="{{member.knownAs}}" >
+                <ng-template pTemplate="header">
+                    <img alt="Card" class="profile-image p-6" src="{{member.photoUrl||'../../../../../assets/profile-user.jpg'}}" />
+                </ng-template>
+                <div class="flex flex-column">
+                    <div>
+                        <strong>Location:</strong>
+                        <p>{{member.city}},{{member.country}}</p>
+                    </div>
+                    <div>
+                        <strong>Age:</strong>
+                        <p>{{member.age}}</p>
+                    </div>
+                    <div>
+                        <strong>Last Active:</strong>
+                        <p>{{member.lastActive}}</p>
+                    </div>
+                    <div>
+                        <strong>Member since:</strong>
+                        <p>{{member.created}}</p>
+                    </div>
+                </div>
+                <ng-template pTemplate="footer">
+                    <button
+                        type="submit"
+                        form="editForm"
+                        [disabled]="!editForm.dirty"
+                        pButton 
+                        pRipple 
+                        icon="pi pi-check"
+                        label="Save Changes" 
+                        class="p-button-info">
+                    </button>
+                </ng-template>
+            </p-card>
+        </div>
+        <!--  -->
+        <div class="w-8">
+            <p-tabView>
+                <p-tabPanel header="About {{member.knownAs}}">
+                    <form id="editForm" #editForm="ngForm" (ngSubmit)="updateMember()">
+                        <div class="flex flex-column mb-2">
+                            <label class="mb-2 font-bold">Description</label>
+                            <textarea [(ngModel)]="member.introduction" rows="5" cols="40" pInputTextarea
+                            [autoResize]="true" name="introduction">
+                        </textarea>
+                    </div>
+                    <div class="flex flex-column mb-2">
+                        <label class="mb-2 font-bold">Intrests</label>
+                        <textarea [(ngModel)]="member.intresets" rows="5" cols="40" pInputTextarea
+                        [autoResize]="true" name="intresets">
+                    </textarea>
+                </div>
+                <div class="flex flex-column mb-2">
+                    <label class="mb-2 font-bold">Location Details</label>
+                    <div class="flex align-items-center justify-content-between gap-2">
+                        <label class="mr-2">City:</label>
+                        <input class="w-full" type="text" pInputText [(ngModel)]="member.city" name="city" />
+                        <label class="mr-2">Country:</label>
+                        <input class="w-full" type="text" pInputText [(ngModel)]="member.country" name="country" />
+                    </div>
+                </div>
+
+                </form>
+                </p-tabPanel>
+                <p-tabPanel header="Edit Photos">
+                    
+                </p-tabPanel>
+               
+            </p-tabView>
+        </div>
+            
+        </div>
+        
+}
+

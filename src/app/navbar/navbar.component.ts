@@ -93,6 +93,6 @@ export class NavbarComponent implements OnInit{
   }
 
   editProfile(){
-
+    this.router.navigate(['/memberProfile/edit'])    
   }
 }

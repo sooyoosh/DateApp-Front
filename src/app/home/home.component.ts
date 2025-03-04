@@ -35,7 +35,6 @@ register(form){
   }
   this.accountService.register(form.value).subscribe({
     next:(res:any)=>{
-      debugger
     },
     error:(err)=>{
       this.messageService.add({ key: 'toast1', severity: 'error', summary: 'Error', detail:'useramusername already taken' })
