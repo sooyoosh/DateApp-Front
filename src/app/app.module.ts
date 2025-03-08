@@ -26,6 +26,7 @@ import { MemberEditComponent } from './member/member-edit/member-edit.component'
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { LoadingComponent } from './loading/loading/loading.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { loadingInterceptor } from './interceptors/loading.interceptor';
 
 
 
@@ -59,7 +60,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputTextareaModule,
     ProgressSpinnerModule 
   ],
-  providers: [MessageService,provideHttpClient(withInterceptors([authInterceptor]))],
+  providers: [MessageService,provideHttpClient(withInterceptors([authInterceptor,loadingInterceptor]))],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

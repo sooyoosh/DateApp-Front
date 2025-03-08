@@ -1,5 +1,5 @@
 <div class="card flex gap-2 justify-content-center">
-@for (item of members; track item.id) {
+@for (item of memberService.members(); track item.id) {
         <p-card header="Advanced Card" subheader="{{item.userName}}" [style]="{ width: '360px' }">
             <ng-template pTemplate="header">
                 <img alt="Card" class="profile-image" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
