@@ -1,0 +1,41 @@
+<div class="flex gap-1">
+    @for (item of member.photos; track $index) {
+        <div class="card flex justify-content-center">
+            <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
+                <ng-template pTemplate="header">
+                    <img alt="Card" [src]="item.url" />
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <div class="flex gap-3 mt-1">
+                        <p-button icon="pi pi-trash" [raised]="true" severity="danger" class="w-full" styleClass="w-full" />
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    
+    
+    }
+</div>
+<!-- uploading file -->
+<div class=" flex justify-content-center mt-2">
+    <p-toast />
+    <p-fileUpload 
+        name="demo[]"  
+        [customUpload]="true" 
+        (uploadHandler)="customUpload($event)"
+        [multiple]="true" 
+        accept="image/*" 
+        [maxFileSize]="1000000">
+            <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">
+                        {{ file.name }} - {{ file.size }} bytes
+                    </li>
+                </ul>
+            </ng-template>
+    </p-fileUpload>
+</div>
+
+
+
+

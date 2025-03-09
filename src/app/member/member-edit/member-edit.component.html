@@ -67,7 +67,7 @@
                 </form>
                 </p-tabPanel>
                 <p-tabPanel header="Edit Photos">
-                    
+                    <app-photo-editor [member]="member" (emitMember)="emitMember($event)"></app-photo-editor>
                 </p-tabPanel>
                
             </p-tabView>

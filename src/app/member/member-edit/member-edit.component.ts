@@ -60,4 +60,7 @@ updateMember(){
   })
 }
 
+emitMember(member:Member){
+  console.log(member)
+}
 }
