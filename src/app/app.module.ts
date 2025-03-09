@@ -27,7 +27,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { LoadingComponent } from './loading/loading/loading.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { loadingInterceptor } from './interceptors/loading.interceptor';
-
+import { PhotoEditorComponent } from './member/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { loadingInterceptor } from './interceptors/loading.interceptor';
     MessagesComponent,
     MemberEditComponent,
     LoadingComponent,
+    PhotoEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import { loadingInterceptor } from './interceptors/loading.interceptor';
     TabViewModule,
     GalleriaModule,
     InputTextareaModule,
-    ProgressSpinnerModule 
+    ProgressSpinnerModule,
+    FileUploadModule 
   ],
   providers: [MessageService,provideHttpClient(withInterceptors([authInterceptor,loadingInterceptor]))],
   bootstrap: [AppComponent]
