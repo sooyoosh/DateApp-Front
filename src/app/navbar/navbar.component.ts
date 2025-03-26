@@ -15,7 +15,8 @@ export class NavbarComponent implements OnInit{
   isLogedIn:boolean=false
   items:MenuItem[]
   userName:any
-  constructor(private accountService:AccountService,private messageService: MessageService,
+  userPhotoUrl: string;
+  constructor(public accountService:AccountService,private messageService: MessageService,
     private router:Router
    ){
 
@@ -29,6 +30,7 @@ export class NavbarComponent implements OnInit{
       if(data!=null){
         this.isLogedIn=true
         this.userName=data.username
+        this.userPhotoUrl=data.photoUrl
         //menu items
     this.items=[
       {

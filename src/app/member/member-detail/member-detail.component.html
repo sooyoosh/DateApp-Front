@@ -3,7 +3,7 @@
         <div class="w-3">
             <p-card header="{{member.userName}}" subheader="{{member.knownAs}}" >
                 <ng-template pTemplate="header">
-                    <img alt="Card" class="profile-image p-6" src="{{member.photoUrl||'../../../../../assets/profile-user.jpg'}}" />
+                    <img alt="Card" class="profile-image p-6" src="{{member.photoUrl?member.photoUrl:'../../../../../assets/profile-user.jpg'}}" />
                 </ng-template>
                 <div class="flex flex-column">
                     <div>

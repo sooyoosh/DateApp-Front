@@ -25,7 +25,16 @@ export class MemberService {
     if(member!==undefined && member!==null) return of(member);
     return this.http.get<Member>(this.baseUrl+'users/'+userName)
   }
+  getMemberByUsernameApi(userName){
+    return this.http.get<Member>(this.baseUrl+'users/'+userName)
+  }
   updateMember(member:Member){
     return this.http.put(this.baseUrl+'users',member)
+  }
+  setMainPhoto(photoId){
+   return this.http.put(this.baseUrl+`users/set-main-photo/${photoId}`,{})
+  }
+  deletePhoto(photoId){
+    return this.http.delete(this.baseUrl+`users/delete-photo/${photoId}`)
   }
 }

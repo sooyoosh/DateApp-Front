@@ -16,10 +16,10 @@
             <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
                 <div class="grid w-full">
                     <div class="col-5 ">
-                        <input name="Username" required ngModel type="text" pInputText class="w-full">
+                        <input name="Username" placeholder="userame" required ngModel type="text" pInputText class="w-full">
                     </div>
                     <div class="col-5">
-                        <input name="Password" required ngModel type="password" pInputText class="w-full">
+                        <input name="Password" placeholder="password" required ngModel type="password" pInputText class="w-full">
                     </div>
                     <div class="col-2">
                         <button type="submit" style="border-radius: 12px;" pButton pRipple label="Login" class="p-button-success"></button> 
@@ -31,6 +31,9 @@
             <div class="grid w-full justify-content-end">
                 <div class="col-5">
                     <p-menubar [model]="items" [style]="{border:'none'}"/>
+                </div>
+                <div class="col-3 flex align-items-center">
+                    <img src="{{this.userPhotoUrl?this.userPhotoUrl:'../../../../assets/profile-user.jpg'}}" class="profile-pic" alt="">
                 </div>
             </div>
         }

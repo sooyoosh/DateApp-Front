@@ -1,4 +1,4 @@
-<div class="flex gap-1">
+<div class="flex gap-1 flex-wrap">
     @for (item of member.photos; track $index) {
         <div class="card flex justify-content-center">
             <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
@@ -7,7 +7,11 @@
                 </ng-template>
                 <ng-template pTemplate="footer">
                     <div class="flex gap-3 mt-1">
-                        <p-button icon="pi pi-trash" [raised]="true" severity="danger" class="w-full" styleClass="w-full" />
+                        <p-button icon="pi pi-trash" [raised]="true" [disabled]="item.isMain"
+                         severity="danger" (onClick)="deletePhoto(item.id)" class="w-full" styleClass="w-full" />
+                        
+                         <p-button label="Set Main" [raised]="true" [disabled]="item.isMain"
+                         severity="info" (onClick)="setMain(item)" class="w-full" styleClass="w-full" />
                     </div>
                 </ng-template>
             </p-card>

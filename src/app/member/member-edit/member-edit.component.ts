@@ -4,6 +4,7 @@ import { MemberService } from '../../services/member.service';
 import { Member } from '../../models/Member';
 import { MessageService } from 'primeng/api';
 import { NgForm } from '@angular/forms';
+import { user } from '../../models/user';
 
 @Component({
   selector: 'app-member-edit',
@@ -12,6 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class MemberEditComponent implements OnInit {
 member:Member
+user:user
 @ViewChild('editForm') editForm:NgForm;
 @HostListener('window:beforeunload',['$event']) func(event:any){
   if(this.editForm.dirty){
@@ -31,8 +33,10 @@ loadMember(){
   const user=this.accountService.currentUser$.subscribe({
     next:(user)=>{
       if(user!=null){
+        this.user=user
         this.memberService.getMemberByUsername(user.username).subscribe({
-          next:(member)=> this.member=member,
+          next:(member)=> {debugger
+            this.member=member},
           error:(err)=>{
             this.messagingService.add({
               key: 'toast1',
@@ -61,6 +65,19 @@ updateMember(){
 }
 
 emitMember(member:Member){
-  console.log(member)
+  this.member=member,
+  this.memberService.members.set([])
 }
+// fetchingMember(){
+//   this.memberService.getMemberByUsernameApi(this.user.username).subscribe({
+//     next:(res)=>{
+//       this.member=res
+//       this.member={...this.member}
+//     },
+//     error:(err)=>{
+//       console.log("error in fetching member")
+//     }
+//   })
+// }
+
 }

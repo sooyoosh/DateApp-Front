@@ -39,5 +39,8 @@ logout(){
   localStorage.removeItem('user')
   this.correntUserSource.next(null)
 }
+curentUserValue(){
+  return this.correntUserSource.value;
+}
 
 }
