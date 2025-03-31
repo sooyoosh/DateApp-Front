@@ -37,4 +37,8 @@ export class MemberService {
   deletePhoto(photoId){
     return this.http.delete(this.baseUrl+`users/delete-photo/${photoId}`)
   }
+  photoUpload(file){
+    return this.http.post(this.baseUrl+`users/photo/upload`,file)
+  }
+
 }

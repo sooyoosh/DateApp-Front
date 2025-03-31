@@ -23,21 +23,26 @@ export class PhotoEditorComponent implements OnInit{
   }
 
   customUpload(event){
-    for(let file of event.files) {
-      if(file){
-        const reader=new FileReader();
-        
-        reader.onload=(e:any)=>{
-          this.updateMember={...this.member}
-          this.updateMember.photos.push({id:0,url:e.target.result,isMain:false})
-          this.emitMember.emit(this.updateMember)
+    const file=event.files[0]
+     if(file){
+      const formData=new FormData()
+      formData.append('file',file)
+      this.memberService.photoUpload(formData).subscribe({
+        next:(res:any)=>{
+          const photo:any=res
+          const updateMember={...this.member};
+          updateMember.photos.push(photo);
+          this.emitMember.emit(updateMember);
+        },
+        error:(err)=>{
+          this.messagingService.add({
+            key: 'toast1',
+            severity: 'error', summary: 'Fail',
+            detail:'' })      
         }
-
-        reader.readAsDataURL(file)
-      }
-      
-    }
-
+      })
+     }
+    
   }
 
   setMain(photo:Photo){
@@ -70,11 +75,13 @@ export class PhotoEditorComponent implements OnInit{
           key: 'toast1',
           severity: 'success', summary: 'Phtoo Is Deleted',
           detail:'' });
+          debugger
           const updateMember={...this.member}
-          updateMember.photos.filter(i=>i.id!=photoId)
+          updateMember.photos=updateMember.photos.filter(i=>i.id!=photoId)
           this.emitMember.emit(updateMember)
       },
       error:(err)=>{
+        debugger
         this.messagingService.add({
           key: 'toast1',
           severity: 'error', summary: 'Fail',

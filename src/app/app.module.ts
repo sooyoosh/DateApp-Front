@@ -7,7 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -29,7 +29,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { loadingInterceptor } from './interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './member/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'primeng/fileupload';
-
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,9 @@ import { FileUploadModule } from 'primeng/fileupload';
     GalleriaModule,
     InputTextareaModule,
     ProgressSpinnerModule,
-    FileUploadModule 
+    FileUploadModule,
+    ReactiveFormsModule,
+    RadioButtonModule 
   ],
   providers: [MessageService,provideHttpClient(withInterceptors([authInterceptor,loadingInterceptor]))],
   bootstrap: [AppComponent]

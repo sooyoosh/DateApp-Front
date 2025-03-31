@@ -12,18 +12,82 @@
         </div>
     }
     @else {
-        <form #registerForm="ngForm"  (ngSubmit)="register(registerForm)">
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
         <div class="flex flex-column  h-11rem " >
-                <label class="mt-2">Enter Your Username</label>
-                <input type="text" name="UserName" class="mt-2" pInputText ngModel />
-                <label class="mt-2">Enter Your Password</label>
-                <input type="password" name="Password" class="mt-2" pInputText ngModel />
+            <!--  -->
+            <label class="mt-2">I am a:</label>
+            <div class="flex flex-wrap gap-3 mt-2">
+                <div class="flex align-items-center">
+                    <p-radioButton 
+                        value="male"
+                        formControlName="gender"  
+                        inputId="ingredient1" />
+                    <label for="ingredient1" class="ml-2">
+                        male
+                    </label>
+                </div>
+                
+                <div class="flex align-items-center">
+                    <p-radioButton  
+                        value="female"
+                        formControlName="gender"  
+                        inputId="ingredient2" />
+                    <label for="ingredient2" class="ml-2">
+                        female
+                    </label>
+                </div>
+            </div>
+            <!--  -->
+            <!--  -->
+            <label class="mt-2">Enter Your Username</label>
+            <input type="text" name="UserName"
+            formControlName="username" class="mt-2" pInputText />
+            <small *ngIf="registerForm.get('username')?.hasError('required') &&registerForm.get('username')?.touched " style="color: red;">please enter your username</small>
+            <!--  -->
+            <!--  -->
+            <label class="mt-2">Enter Your KnownAs</label>
+            <input type="text" name="KnownAs"
+            formControlName="knownAs" class="mt-2" pInputText />
+            <small *ngIf="registerForm.get('knownAs')?.hasError('required') &&registerForm.get('knownAs')?.touched " style="color: red;">please enter your knownAs</small>
+            <!--  -->
+            <!--  -->
+            <label class="mt-2">Enter Your dateOfBirth</label>
+            <p-calendar formControlName="dateOfBirth" [dateFormat]="'yy-mm-dd'" class="mt-2" [defaultDate]="maxDate" [style]="{width:'100%'}"/>
+            <small *ngIf="registerForm.get('dateOfBirth')?.hasError('required') &&registerForm.get('dateOfBirth')?.touched " style="color: red;">please enter your dateOfBirth</small>
+            <!--  -->
+            <!--  -->
+            <label class="mt-2">Enter Your city</label>
+            <input type="text" name="city"
+            formControlName="city" class="mt-2" pInputText />
+            <small *ngIf="registerForm.get('city')?.hasError('required') &&registerForm.get('city')?.touched " style="color: red;">please enter your city</small>
+            <!--  -->
+            <!--  -->
+            <label class="mt-2">Enter Your country</label>
+            <input type="text" name="country"
+            formControlName="country" class="mt-2" pInputText />
+            <small *ngIf="registerForm.get('country')?.hasError('required') &&registerForm.get('country')?.touched " style="color: red;">please enter your country</small>
+            <!--  -->
+            <!--  -->
+            <label class="mt-2">Enter Your Password</label>
+            <input type="password" name="Password"
+            formControlName="password" class="mt-2" pInputText />
+            <small *ngIf="registerForm.get('password')?.hasError('required') &&registerForm.get('password')?.touched" style="color: red;">please enter your password</small>
+            <small *ngIf="registerForm.get('password')?.hasError('minlength') &&registerForm.get('password')?.touched" style="color: red;" style="color: red;">your password must has 4 charachter atleast</small>
+            <!--  -->
+            <!--  -->
+            <label class="mt-2">Enter Your Password Again</label>
+            <input type="password" name="confirmPassword"
+            formControlName="confirmPassword" class="mt-2" pInputText />
+            <small *ngIf="registerForm.get('confirmPassword')?.hasError('required') &&registerForm.get('confirmPassword')?.touched" style="color: red;" style="color: red;">please enter your password again</small>
+            <small *ngIf="registerForm.get('confirmPassword')?.hasError('missMatching')&&registerForm.get('confirmPassword')?.value" style="color: red;" style="color: red;">please enter your password right</small>
+            <!--  -->
                 <div class="mt-4">
-                    <p-button label="Register" class="mr-3" type="submit"/>
+                    <p-button label="Register" [disabled]="this.registerForm.invalid" class="mr-3" type="submit"/>
                     <p-button label="Cancle" (onClick)="cancle()"  severity="danger"/>
                 </div>
             </div>
         </form>
+
     }
     
     </div>
