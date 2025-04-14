@@ -30,6 +30,10 @@ import { loadingInterceptor } from './interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './member/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { PaginatorModule } from 'primeng/paginator';
+import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [
@@ -63,7 +67,11 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     ProgressSpinnerModule,
     FileUploadModule,
     ReactiveFormsModule,
-    RadioButtonModule 
+    RadioButtonModule,
+    PaginatorModule,
+    DropdownModule,
+    SelectButtonModule,
+    TimeagoModule.forRoot() 
   ],
   providers: [MessageService,provideHttpClient(withInterceptors([authInterceptor,loadingInterceptor]))],
   bootstrap: [AppComponent]

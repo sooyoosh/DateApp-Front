@@ -1,20 +1,58 @@
-<div class="card flex gap-2 justify-content-center">
-@for (item of memberService.members(); track item.id) {
-        <p-card header="Advanced Card" subheader="{{item.userName}}" [style]="{ width: '360px' }">
-            <ng-template pTemplate="header">
-                <img alt="Card" class="profile-image" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-            </ng-template>
-            <p>
-               {{item.knownAs}}
-            </p>
-            <ng-template pTemplate="footer">
-                <div class="flex gap-3 mt-1">
-                    <p-button icon="pi pi-user" [routerLink]="['/member',item.userName]" severity="secondary" [raised]="true" class="w-full" styleClass="w-full" />
-                    <p-button icon="pi pi-heart" severity="secondary" [raised]="true" class="w-full" styleClass="w-full" />
-                    <p-button icon="pi pi-envelope" severity="secondary" [raised]="true" class="w-full" styleClass="w-full" />
-                </div>
-            </ng-template>
-        </p-card>
+<div class="card flex justify-content-center mt-1 flex-column mb-3 align-items-center">
+    <h3>your match is :{{this.memberService.PaginationResult()?.pagination?.totalItems}}</h3>
+    <div class="flex gap-2 align-items-center mb-3">
         
+        <label>Age From:</label>
+        <input name="minAge" placeholder="just number" [(ngModel)]="this.userParams.minAge" type="number" pInputText>
+        <label>Age To:</label>
+        <input name="maxAge" placeholder="just number" [(ngModel)]="this.userParams.maxAge" type="number" pInputText>
+        <p-dropdown [options]="genderList" name="gender" [(ngModel)]="this.userParams.gender" optionValue="value" optionLabel="display" placeholder="Select a Gender" />
+
+            <div class="flex justify-content-center align-items-center gap-2">
+                <label>sorting by:</label>
+                <p-selectButton 
+                    [options]="orderByOption" 
+                    [(ngModel)]="this.userParams.orderBy" 
+                    optionLabel="display" 
+                    optionValue="value"/>
+            </div>
+        
+
+
+
+    </div>
+    
+    <div class="flex gap-2">
+        <p-button label="Apply Filter" (onClick)="getAllMembers()" type="submit" severity="secondary" [raised]="true"  />
+        <p-button label="Reset Filter" severity="secondary" (onClick)="resetFilters()" [raised]="true" />
+    </div>
+  
+</div>
+
+<div class="card flex gap-2 justify-content-center flex-wrap">
+    @for (item of memberService.PaginationResult()?.items; track item.id) {
+    <p-card header="Advanced Card" subheader="{{item.userName}}" [style]="{ width: '360px' }">
+        <ng-template pTemplate="header">
+            <img alt="Card" class="profile-image" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+        </ng-template>
+        <p>
+            {{item.knownAs}}
+        </p>
+        <ng-template pTemplate="footer">
+            <div class="flex gap-3 mt-1">
+                <p-button icon="pi pi-user" [routerLink]="['/member',item.userName]" severity="secondary"
+                    [raised]="true" class="w-full" styleClass="w-full" />
+                <p-button icon="pi pi-heart" severity="secondary" [raised]="true" class="w-full" styleClass="w-full" />
+                <p-button icon="pi pi-envelope" severity="secondary" [raised]="true" class="w-full"
+                    styleClass="w-full" />
+            </div>
+        </ng-template>
+    </p-card>
+
     }
+</div>
+<div class="card flex justify-content-center mt-3">
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first"
+        [rows]="this.memberService.PaginationResult()?.pagination?.itemsPerPage!"
+        [totalRecords]="this.memberService.PaginationResult()?.pagination?.totalItems!" />
 </div>

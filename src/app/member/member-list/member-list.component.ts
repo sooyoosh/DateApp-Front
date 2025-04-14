@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MemberService } from '../../services/member.service';
 import { Member } from '../../models/Member';
 import { MessageService } from 'primeng/api';
+import { AccountService } from '../../services/account.service';
+import { UserParams } from '../../models/userParams';
 
 @Component({
   selector: 'app-member-list',
@@ -9,27 +11,45 @@ import { MessageService } from 'primeng/api';
   styleUrl: './member-list.component.css'
 })
 export class MemberListComponent implements OnInit{
-  //members:Member[]=[]
+  first: number = 0;
+  genderList:genderLit[]
+  orderByOption:orderBy[]
+  
   constructor(public memberService:MemberService,
-    private messagingService:MessageService){}
-  ngOnInit() {
-    //this.getAllMembers();
-    if(this.memberService.members().length===0) this.getAllMembers();
+    private messagingService:MessageService,
+    private accountService:AccountService){
+      this.genderList=[{value:'male',display:'males'},
+        {value:'female',display:'females'}];
+
+      this.orderByOption=[{value:'created',display:'created'},
+        {value:'lastActive',display:'lastActive'}];
+    }
+    userParams=new UserParams(this.accountService.curentUserValue())
+  
+  
+    ngOnInit() {
+    if(!this.memberService.PaginationResult()) this.getAllMembers();
   }
 
   getAllMembers(){
-    // this.memberService.getMembers().subscribe({
-    //   next:(res)=>{
-    //     this.members=res
-    //   },
-    //   error:(err)=>{
-    //     this.messagingService.add({
-    //           key: 'toast1',
-    //           severity: 'error', summary: 'Error in Fetching Members',
-    //           detail:'' })
-        
-    //   }
-    // })
-    this.memberService.getMembers();
+    debugger
+     this.memberService.getMembers(this.userParams);
   }
+  resetFilters(){ 
+    this.userParams=new UserParams(this.accountService.curentUserValue());
+    this.getAllMembers();
+  }
+  onPageChange(event){
+      this.userParams.pageNumber=event.page;
+      this.userParams.pageNumber++;
+      this.getAllMembers();
+  }
+}
+export interface genderLit {
+  value:string,
+  display:string
+}
+export interface orderBy {
+  value:string,
+  display:string
 }
