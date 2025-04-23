@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { BehaviorSubject, map } from 'rxjs';
 import { user } from '../models/user';
+import { LikesService } from './likes.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { user } from '../models/user';
 export class AccountService {
 correntUserSource=new BehaviorSubject<user|null>(null)
 currentUser$=this.correntUserSource.asObservable();
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private likeService:LikesService) { }
 
 login(model){
   return this.http.post<user>(environment.apiBaseUrl+'account/login',model).pipe(
@@ -19,6 +20,7 @@ login(model){
       if(user){
         localStorage.setItem('user',JSON.stringify(user))
         this.correntUserSource.next(user)
+        this.likeService.getUserLIkeListId();
       }
     })
   )
@@ -29,7 +31,8 @@ register(model){
       const user=res;
       if(user){
         localStorage.setItem('user',JSON.stringify(user))
-        this.correntUserSource.next(user)
+        this.correntUserSource.next(user);
+        this.likeService.getUserLIkeListId();
       }
       return user;
     })

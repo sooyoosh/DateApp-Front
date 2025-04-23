@@ -38,6 +38,7 @@
         <p>
             {{item.knownAs}}
         </p>
+        <i (click)="toggleLike(item.id)" class="cursor-pointer w-10" [ngClass]="hasLiked(item.id) ? 'pi pi-heart-fill text-red-500' : 'pi pi-heart text-gray-400'"></i>
         <ng-template pTemplate="footer">
             <div class="flex gap-3 mt-1">
                 <p-button icon="pi pi-user" [routerLink]="['/member',item.userName]" severity="secondary"

@@ -1,1 +1,39 @@
-<p>lists works!</p>
+<div class="text-center">
+    <h2>{{this.gettingTitle()}}</h2>
+</div>
+<div class="flex gap-2">
+    <p-button (onClick)="this.loadLikeMember('liked')" label="member i like" [text]="true" [raised]="true" severity="help" />
+    <p-button (onClick)="this.loadLikeMember('likedBy')" label="member who like me" [text]="true" [raised]="true" severity="danger" />
+    <p-button (onClick)="this.loadLikeMember('mutual')" label="mutual" [text]="true" [raised]="true" severity="warning" />
+</div>
+<!--members card  -->
+<div class="card flex gap-2 justify-content-center flex-wrap mt-5">
+    @for (item of paginationResult.items; track item.id) {
+    <p-card header="Advanced Card" subheader="{{item.userName}}" [style]="{ width: '360px' }">
+        <ng-template pTemplate="header">
+            <img alt="Card" class="profile-image" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+        </ng-template>
+        <p>
+            {{item.knownAs}}
+        </p>
+        <i *ngIf="this.likeParams.predicate=='liked'" class="cursor-pointer w-10" class="pi pi-heart-fill text-red-500"></i>
+        <ng-template pTemplate="footer">
+            <div class="flex gap-3 mt-1">
+                <p-button icon="pi pi-user" [routerLink]="['/member',item.userName]" severity="secondary"
+                    [raised]="true" class="w-full" styleClass="w-full" />
+                <p-button icon="pi pi-heart" severity="secondary" [raised]="true" class="w-full" styleClass="w-full" />
+                <p-button icon="pi pi-envelope" severity="secondary" [raised]="true" class="w-full"
+                    styleClass="w-full" />
+            </div>
+        </ng-template>
+    </p-card>
+
+    }
+</div>
+
+<div class="card flex justify-content-center mt-3">
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first"
+        [rows]="this.paginationResult?.pagination?.itemsPerPage!"
+        [totalRecords]="this.paginationResult?.pagination?.totalItems!" />
+</div>
+
