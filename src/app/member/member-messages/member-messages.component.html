@@ -1,0 +1,32 @@
+@if(messages.length==0){
+<div class="text-center">
+    <h2>no messages here</h2>
+</div>
+} @else{
+    @for (message of messages; track $index) {
+
+        <p-card header="messages" class="m-2">
+            <div class="flex justify-content-between" >
+                <div class="p-2">
+                   <small class="flex gap-2">
+                    <span class="pi pi-clock">{{message.messageSent| timeago}}</span>
+                    <span class="text-pink-800" *ngIf="!message.dateRead">unread</span>
+                    <span class="text-teal-800" *ngIf="message.dateRead">read {{message.dateRead | timeago}}</span>
+                   </small>
+                   <div>
+                        <p>{{message.content}}</p>
+                   </div>
+                </div>
+                <div class="p-2">
+                    <img src="{{message.senderPhotoUrl||'../../../../../assets/profile-user.jpg'}}" class="profile-pic" alt="">
+                </div>
+            </div>
+        </p-card>
+    }
+    <p-card header="send message" class="m-2">
+        <div class="flex">
+            <input [(ngModel)]="this.contentMessage" class="w-8" type="text" name="message" pInputText placeholder="send message" />
+            <p-button [disabled]="!this.contentMessage?.length" icon="pi pi-send" class="ml-2" (onClick)="sendMessage()" />
+        </div>
+    </p-card>
+}

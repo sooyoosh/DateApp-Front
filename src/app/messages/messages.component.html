@@ -1,1 +1,52 @@
-<p>messages works!</p>
+
+<div class="flex gap-2">
+<p-button (onClick)="this.loadMessages('Unread')" label="Unread" [text]="true" [raised]="true" severity="help" />
+<p-button (onClick)="this.loadMessages('Outbox')" label="Outbox" [text]="true" [raised]="true" severity="danger" />
+<p-button (onClick)="this.loadMessages('Inbox')" label="Inbox" [text]="true" [raised]="true" severity="warning" />
+</div>
+
+@if (this.paginationResult.items && !this.paginationResult.items.length) {
+    <h2>there is no message here</h2>
+} @else {
+    <div class="mt-2">
+
+        <p-table [value]="paginationResult.items" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Message</th>
+                    <th>From / To</th>
+                    <th>Sent / Received</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-message>
+                <tr >
+                    <td>{{message.content}}</td>
+                    <td >
+                        <div [routerLink]="['/member',getRoutes(message)]" [queryParams]="{tab:'messages'}">
+                            <img class="profile-pic" [src]="messageParams.container=='Outbox'?
+                            (message.recipientPhotoUrl||'../../assets/profile-user.jpg')
+                            :(message.senderPhotoUrl||'../../assets/profile-user.jpg')"
+                             alt="">
+                        </div>
+                        <strong>{{messageParams.container=='Outbox'?message.recipientUsername:message.senderUsername}}</strong>
+                    </td>
+                    <td>{{message.messageSent | timeago}}</td>
+                    <td>
+                        <p-button icon="pi pi-trash" severity="danger" (onClick)="deleteMessage(message.id)" />
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    
+
+    
+}
+
+<div class="card flex justify-content-center mt-3" *ngIf="this.paginationResult.pagination&&this.paginationResult.items.length">
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first"
+        [rows]="this.paginationResult.pagination.itemsPerPage"
+        [totalRecords]="this.paginationResult.pagination.totalItems" />
+</div>
+

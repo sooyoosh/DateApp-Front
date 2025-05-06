@@ -25,13 +25,13 @@
                 </div>
                 <ng-template pTemplate="footer">
                     <p-button icon="pi pi-heart" label="Like" class="mr-2" [rounded]="true" severity="danger" />
-                    <p-button icon="pi pi-envelope" label="Message" [rounded]="true" severity="info" />
+                    <p-button (onClick)="goingToMessageTab('messges')" icon="pi pi-envelope" label="Message" [rounded]="true" severity="info" />
                 </ng-template>
             </p-card>
         </div>
         <!--  -->
         <div class="w-8">
-            <p-tabView>
+            <p-tabView [(activeIndex)]="activeIndex">
                 <p-tabPanel header="About {{member.knownAs}}">
                     <h4>Description</h4>
                     <p>{{member.introduction}}</p>
@@ -61,7 +61,7 @@
                     </div>   
                 </p-tabPanel>
                 <p-tabPanel header="Messages">
-                    <p>message here</p>
+                    <app-member-messages [userName]="member.userName"></app-member-messages>
                 </p-tabPanel>
             </p-tabView>
         </div>

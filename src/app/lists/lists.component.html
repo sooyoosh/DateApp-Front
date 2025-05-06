@@ -31,9 +31,9 @@
     }
 </div>
 
-<div class="card flex justify-content-center mt-3">
+<div class="card flex justify-content-center mt-3" *ngIf="this.paginationResult.pagination">
     <p-paginator (onPageChange)="onPageChange($event)" [first]="first"
-        [rows]="this.paginationResult?.pagination?.itemsPerPage!"
-        [totalRecords]="this.paginationResult?.pagination?.totalItems!" />
+        [rows]="this.paginationResult.pagination.itemsPerPage"
+        [totalRecords]="this.paginationResult.pagination.totalItems" />
 </div>
 

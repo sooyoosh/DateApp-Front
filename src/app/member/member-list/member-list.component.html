@@ -44,7 +44,7 @@
                 <p-button icon="pi pi-user" [routerLink]="['/member',item.userName]" severity="secondary"
                     [raised]="true" class="w-full" styleClass="w-full" />
                 <p-button icon="pi pi-heart" severity="secondary" [raised]="true" class="w-full" styleClass="w-full" />
-                <p-button icon="pi pi-envelope" severity="secondary" [raised]="true" class="w-full"
+                <p-button [routerLink]="['/member',item.userName]" [queryParams]="{tab:'messages'}" icon="pi pi-envelope" severity="secondary" [raised]="true" class="w-full"
                     styleClass="w-full" />
             </div>
         </ng-template>

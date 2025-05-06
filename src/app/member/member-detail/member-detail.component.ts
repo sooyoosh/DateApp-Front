@@ -10,7 +10,8 @@ import { Member } from '../../models/Member';
   styleUrl: './member-detail.component.css'
 })
 export class MemberDetailComponent implements OnInit{
-  member:Member
+  member:Member;
+  activeIndex: number = 0;
   images: any[]=[];
   responsiveOptions: any[]=[];
   constructor(private memberService:MemberService,
@@ -33,6 +34,9 @@ export class MemberDetailComponent implements OnInit{
   }
   ngOnInit() {
     this.loadMember()
+    this.route.queryParams.subscribe((data)=>{
+      this.goingToMessageTab(data['tab']);
+    })
   }
   loadMember(){
     const userName=this.route.snapshot.paramMap.get('userName')
@@ -52,6 +56,10 @@ export class MemberDetailComponent implements OnInit{
           detail:'' })
       }
     })
+  }
+
+  goingToMessageTab(tab:string){
+    if(tab=='messages')this.activeIndex=3;
   }
 
 }

@@ -34,6 +34,10 @@ import { PaginatorModule } from 'primeng/paginator';
 import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TimeagoModule } from 'ngx-timeago';
+import { TableModule } from 'primeng/table';
+import { MemberMessagesComponent } from './member/member-messages/member-messages.component';
+
+
 
 @NgModule({
   declarations: [
@@ -47,6 +51,7 @@ import { TimeagoModule } from 'ngx-timeago';
     MemberEditComponent,
     LoadingComponent,
     PhotoEditorComponent,
+    MemberMessagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +76,7 @@ import { TimeagoModule } from 'ngx-timeago';
     PaginatorModule,
     DropdownModule,
     SelectButtonModule,
+    TableModule,
     TimeagoModule.forRoot() 
   ],
   providers: [MessageService,provideHttpClient(withInterceptors([authInterceptor,loadingInterceptor]))],
