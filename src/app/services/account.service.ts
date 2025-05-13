@@ -11,6 +11,8 @@ import { LikesService } from './likes.service';
 export class AccountService {
 correntUserSource=new BehaviorSubject<user|null>(null)
 currentUser$=this.correntUserSource.asObservable();
+roles=new BehaviorSubject<any|null>(null);
+roles$=this.roles.asObservable();
   constructor(private http:HttpClient,private likeService:LikesService) { }
 
 login(model){
@@ -21,6 +23,7 @@ login(model){
         localStorage.setItem('user',JSON.stringify(user))
         this.correntUserSource.next(user)
         this.likeService.getUserLIkeListId();
+        this.roles.next(this.gettingRoles(user.token))
       }
     })
   )
@@ -45,5 +48,19 @@ logout(){
 curentUserValue(){
   return this.correntUserSource.value;
 }
+//gettingRoles
+gettingRoles(token:string){
+  if(!token) return []
+  try{
+    const payload=JSON.parse(atob(token.split('.')[1]));
+    const roles=payload.role;
+    return Array.isArray(roles)?roles:[roles];
+
+  }catch(err){
+    console.log('invalid token',err);
+    return[];
+  }
+}
+//gettingRoles
 
 }

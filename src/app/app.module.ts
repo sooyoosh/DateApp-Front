@@ -36,6 +36,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { TimeagoModule } from 'ngx-timeago';
 import { TableModule } from 'primeng/table';
 import { MemberMessagesComponent } from './member/member-messages/member-messages.component';
+import { AdminComponent } from './admin/admin/admin.component';
+import { HasroleDirective } from './directives/hasrole.directive';
 
 
 
@@ -52,6 +54,8 @@ import { MemberMessagesComponent } from './member/member-messages/member-message
     LoadingComponent,
     PhotoEditorComponent,
     MemberMessagesComponent,
+    AdminComponent,
+    HasroleDirective,
   ],
   imports: [
     BrowserModule,

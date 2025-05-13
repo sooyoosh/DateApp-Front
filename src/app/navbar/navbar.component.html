@@ -6,6 +6,7 @@
             <a class="text-lg no-underline  ml-4" routerLink="/members" routerLinkActive="active">matches</a>
             <a class="text-lg no-underline  ml-4" routerLink="/lists" routerLinkActive="active">lists</a>
             <a class="text-lg no-underline  ml-4" routerLink="/messages" routerLinkActive="active">message</a>
+            <a *appHasrole="['Admin','Moderator']" class="text-lg no-underline  ml-4" routerLink="/admin" routerLinkActive="active">admin</a>
             <!-- <a class="text-lg no-underline  ml-4 cursor-pointer" (click)="logOut()">logout</a> -->
         }
     </div>

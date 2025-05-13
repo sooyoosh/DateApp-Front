@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { authGuard } from './guards/auth.guard';
 import { MemberEditComponent } from './member/member-edit/member-edit.component';
 import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
+import { AdminComponent } from './admin/admin/admin.component';
+import { adminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -17,7 +19,8 @@ const routes: Routes = [
       {path:'member/:userName', component:MemberDetailComponent},
       {path:'memberProfile/edit', component:MemberEditComponent,canDeactivate:[unsavedChangesGuard]},
       {path:'lists', component:ListsComponent},
-      {path:'messages', component:MessagesComponent}
+      {path:'messages', component:MessagesComponent},
+      {path:'admin', component:AdminComponent,canActivate:[adminGuard]}
     ]
   },
   {path:'**',component:HomeComponent,pathMatch:'full'}
