@@ -1,1 +1,10 @@
-<p>admin works!</p>
+<div class="card">
+    <p-tabView>
+        <p-tabPanel header="user managment" *appHasrole="['Admin']">
+            <app-user-manager></app-user-manager>
+        </p-tabPanel>
+        <p-tabPanel header="photo managment" *appHasrole="['Admin','Moderator']">
+            <app-photo-manger></app-photo-manger>
+        </p-tabPanel>
+    </p-tabView>
+</div>

@@ -38,8 +38,11 @@ import { TableModule } from 'primeng/table';
 import { MemberMessagesComponent } from './member/member-messages/member-messages.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { HasroleDirective } from './directives/hasrole.directive';
-
-
+import { UserManagerComponent } from './admin/user-manager/user-manager.component';
+import { PhotoMangerComponent } from './admin/photo-manger/photo-manger.component';
+import { StepsModule } from 'primeng/steps';
+import { DialogModule } from 'primeng/dialog';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,8 @@ import { HasroleDirective } from './directives/hasrole.directive';
     MemberMessagesComponent,
     AdminComponent,
     HasroleDirective,
+    UserManagerComponent,
+    PhotoMangerComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +86,9 @@ import { HasroleDirective } from './directives/hasrole.directive';
     DropdownModule,
     SelectButtonModule,
     TableModule,
+    StepsModule,
+    DialogModule,
+    CheckboxModule,
     TimeagoModule.forRoot() 
   ],
   providers: [MessageService,provideHttpClient(withInterceptors([authInterceptor,loadingInterceptor]))],

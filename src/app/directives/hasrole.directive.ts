@@ -13,7 +13,6 @@ export class HasroleDirective implements OnInit {
     ,private viewContainerRef:ViewContainerRef,private templateRef:TemplateRef<any>
   ) { }
   ngOnInit() {
-    debugger
     this.accountService.roles$.subscribe((data)=>{
       if(data!=null)this.roles=data
     })
