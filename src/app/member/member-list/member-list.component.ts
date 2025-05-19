@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { AccountService } from '../../services/account.service';
 import { UserParams } from '../../models/userParams';
 import { LikesService } from '../../services/likes.service';
+import { PresenceService } from '../../services/presence.service';
 
 @Component({
   selector: 'app-member-list',
@@ -18,7 +19,9 @@ export class MemberListComponent implements OnInit{
   //members:Member[]|null|undefined
   constructor(public memberService:MemberService,
     private messagingService:MessageService,
-    private accountService:AccountService,private likeService:LikesService){
+    private accountService:AccountService,
+    private likeService:LikesService,private presenceService:PresenceService){
+
       this.genderList=[{value:'male',display:'males'},
         {value:'female',display:'females'}];
 
@@ -47,6 +50,9 @@ export class MemberListComponent implements OnInit{
   }
   hasLiked(id: number): boolean {
     return this.likeService.likedIds().includes(id);
+  }
+  isOnline(username: string): boolean {
+    return this.presenceService.onlineUsers().includes(username);
   }
   toggleLike(id){
     this.likeService.toggleLike(id).subscribe({

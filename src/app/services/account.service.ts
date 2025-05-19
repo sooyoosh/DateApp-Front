@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { BehaviorSubject, map } from 'rxjs';
 import { user } from '../models/user';
 import { LikesService } from './likes.service';
+import { PresenceService } from './presence.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ correntUserSource=new BehaviorSubject<user|null>(null)
 currentUser$=this.correntUserSource.asObservable();
 roles=new BehaviorSubject<any|null>(null);
 roles$=this.roles.asObservable();
-  constructor(private http:HttpClient,private likeService:LikesService) { }
+  constructor(private http:HttpClient,private likeService:LikesService,
+    private presenceService:PresenceService ) { }
 
 login(model){
   return this.http.post<user>(environment.apiBaseUrl+'account/login',model).pipe(
@@ -23,7 +25,11 @@ login(model){
         localStorage.setItem('user',JSON.stringify(user))
         this.correntUserSource.next(user)
         this.likeService.getUserLIkeListId();
-        this.roles.next(this.gettingRoles(user.token))
+        this.roles.next(this.gettingRoles(user.token));
+        //signalR
+        this.presenceService.startConnection();
+        //signalR
+
       }
     })
   )
@@ -36,6 +42,9 @@ register(model){
         localStorage.setItem('user',JSON.stringify(user))
         this.correntUserSource.next(user);
         this.likeService.getUserLIkeListId();
+        //signalR
+        this.presenceService.startConnection();
+        //signalR
       }
       return user;
     })
@@ -44,6 +53,9 @@ register(model){
 logout(){
   localStorage.removeItem('user')
   this.correntUserSource.next(null)
+  //signalR
+        this.presenceService.stopConnection();
+        //signalR
 }
 curentUserValue(){
   return this.correntUserSource.value;
