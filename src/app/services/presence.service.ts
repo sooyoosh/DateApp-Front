@@ -44,7 +44,7 @@ export class PresenceService {
         summary: '', detail:username +' '+'is Offline' })
     });
     this.hubConnection.on('GetOnlineUser', (onlineUsers) => {
-      this.onlineUsers.set(onlineUsers);
+      this.onlineUsers.set(onlineUsers.result);
     });
   }
 
